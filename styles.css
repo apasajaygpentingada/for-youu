@@ -1,0 +1,131 @@
+body {
+  background-color: #ff99cc;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.envelope {
+  background-color: #e07a7a;
+  width: 325px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.envelope__card {
+  position: relative;
+  width: 400px; /* Increased width */
+  height: 300px; /* Increased height */
+  background-color: #ffffff;  /* Changed to white */
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.5s ease, width 0.5s ease;
+  user-select: none;
+  padding: 20px; /* Added padding for spacing */
+}
+
+.envelope__card.open {
+  /* Removed animation to prevent jitter */
+  z-index: 1;
+  transform: translateY(-50px);
+  width: 700px; /* Increased width */
+  height: 300px; /* Increased height */
+  overflow: visible;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 20px;
+}
+
+
+@keyframes cardJump {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-60px);
+  }
+  100% {
+    transform: translateY(-50px);
+  }
+}
+
+.heart {
+  font-size: 50px;
+  color: red;
+  margin-bottom: 10px;
+  user-select: none;
+  margin-right: 20px; /* Added margin-right to separate from text */
+}
+
+.heart.animate {
+  animation: pop 0.3s ease;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.envelope__content {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  padding: 20px;
+  text-align: left;
+  transition: opacity 0.5s ease, max-height 0.5s ease;
+  color: #333;
+  width: 100%; /* Changed to fill card width */
+  box-sizing: border-box;
+  font-family: "Times New Roman", Times, serif;
+  white-space: normal;
+  word-wrap: break-word;
+  line-height: 1.6; /* Ensure line height for readability */
+}
+
+.envelope__content.show {
+  opacity: 1;
+  max-height: 260px; /* Limit max height to fit inside card */
+  overflow-y: auto; /* Allow vertical scroll if content overflows */
+}
+
+.envelope__content h1 {
+  color: #f44336;
+  margin: 10px 0;
+}
+
+.envelope__content p {
+  line-height: 1.6;
+  margin: 8px 0;
+}
+
+button.heart-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 50px;
+  color: #f44336;
+  user-select: none;
+  margin-top: 20px;
+  display: inline-block;
+}

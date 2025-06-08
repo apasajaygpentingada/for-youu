@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>Envelope Card Animation</title>
+</head>
+<body>
+  <div class="envelope">
+    <div class="envelope__card" id="envelopeCard">
+      <div class="heart" id="heart">&hearts;</div>
+      <div class="envelope__content" id="envelopeContent">
+        <h1>Buat Lu,</h1>
+        <p>
+          ya buat lu, gw sebenarnya tertarik sama lu, gw gak inget kapan gw bisa tertarik sama lu tapi klo di pikir pikir kayaknya sih dari awal lu masuk pu deh kayak lu berbeda aja dari yang gw liat beda sama tmn' lu di angktan lu,yang buat berbeda dari pandangan gw tuh lu cantik nya dan cara lu ber outfit tuh beda,tapi pas awal' gw ngedm lu tuh respon nya beda gak kayak cwek' lain di sana dari cara lu ngerespon dm an gw tuh buat gw tertarik sama lu,gw baru berani nge dm lu baru' ini karna kemarin' tmn' gw juga tertarik sama lu, semenjak mereka udh gk tertarik sama lu baru gw berani buat dm lu lagi dan respon nya tetep sama mungkin karna juga lu gak kenal juga ya😂,gw cuman mau ngasih tau aja tapi lewat ini gw cmn bisa lewat sini aja kalau di sekolah kita kyk orng g kenal padahal sama' liat story ig tapi emng lu gak tau ya fitur ig kalau udh liat story di awal terus lu liat lagi username nya bakal muncul paling atas,tapi gapapa itu tanda nya lu sering bolak balik liat sg gw, tapi gw cukup sadar diri aja pas gw mau nge dm lu, takut lu ilfeel aja gw dm mana gw dm nya sok asim bgt jujur gw juga ngerasa gw sok asik tapi kalau gak sok asik maka gak kenal kan wkwk, gw gak tau lu bakal ngomong' ke tmn' lu tapi gw harap si enggk ya intinya gw tertarik sama lu , gw sadar kok tampang ga seberapa berharap sama lu, bebas abis lu liat ini lu bakal ttp mau ngerespon gw atau enggk itu bebas setidaknya gw udh berusaha ngomong tapi lewat web ini ya lumayan lama sih gw buat ini tapi gapapa namanya juga effort ya kan
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const envelopeCard = document.getElementById('envelopeCard');
+    const envelopeContent = document.getElementById('envelopeContent');
+    const heart = document.getElementById('heart');
+
+    let scrollInterval;
+
+    function startScrolling() {
+      const maxScrollTop = envelopeContent.scrollHeight - envelopeContent.clientHeight;
+      if (maxScrollTop <= 0) return; // No need to scroll if content fits
+
+      scrollInterval = setInterval(() => {
+        if (envelopeContent.scrollTop >= maxScrollTop) {
+          envelopeContent.scrollTop = 0; // Reset to top
+        } else {
+          envelopeContent.scrollTop += 1; // Scroll down by 1px
+        }
+      }, 50); // Adjust speed here (lower is faster)
+    }
+
+    function stopScrolling() {
+      clearInterval(scrollInterval);
+    }
+
+    envelopeCard.addEventListener('click', () => {
+      envelopeCard.classList.toggle('open');
+      if (envelopeCard.classList.contains('open')) {
+        envelopeContent.classList.add('show');
+        startScrolling();
+      } else {
+        envelopeContent.classList.remove('show');
+        stopScrolling();
+        envelopeContent.scrollTop = 0; // Reset scroll position when closed
+      }
+    });
+
+    heart.addEventListener('click', (e) => {
+      e.stopPropagation(); // prevent envelope click
+      heart.classList.remove('animate');
+      void heart.offsetWidth; // trigger reflow to restart animation
+      heart.classList.add('animate');
+    });
+  </script>
+</body>
+</html>
